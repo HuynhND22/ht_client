@@ -179,6 +179,14 @@ const Header = () => {
               className="hidden w-full dark:block"
             />
             <Image
+                  width={50}
+                  height={50}
+                  src="/images/brand/Youtube_logo.png"
+                  alt="Brand"
+              className="hidden w-full dark:block"
+                  
+                />
+            <Image
               src="/images/logo/logo.png"
               alt="logo"
               width={119.03}
