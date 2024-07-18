@@ -21,7 +21,7 @@ const Testimonial = () => {
             <SectionHeader
               headerInfo={{
                 title: `Feedback`,
-                subtitle: `Cảm nhận của học viên`,
+                subtitle: `Cảm nhận, mong muốn của người dùng`,
                 description: ''
               }}
             />

@@ -104,22 +104,6 @@ const Footer = () => {
                         Giới thiệu
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Careers
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Pricing
-                      </a>
-                    </li>
                   </ul>
                 </motion.div>
 
@@ -142,7 +126,7 @@ const Footer = () => {
                   className="animate_top"
                 >
                   <h4 className="mb-9 text-itemtitle2 font-medium text-black dark:text-white">
-                    Hổ trợ
+                    Hỗ trợ
                   </h4>
 
                   <ul>
