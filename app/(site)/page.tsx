@@ -10,11 +10,11 @@ import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
-import Blog from "@/components/Blog";
+import Blog from "@/components/Posts";
 import Testimonial from "@/components/Testimonial";
 
 export const metadata: Metadata = {
-  title: "HT | Học văn cùng Hoài Thương",
+  title: "Gác Văn | Học văn cùng Kim Thuý - Hoài Thương",
   description: "Website hướng dẫn học văn học",
   // other metadata
 };
@@ -23,14 +23,9 @@ export default function Home() {
   return (
     <main>
       <Hero />
-        
-      
-
       <Integration />
       <Blog />
-      
       <Testimonial />
-      
     </main>
   );
 }

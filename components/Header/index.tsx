@@ -4,11 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu } from "@/types/menu";
-import React from 'react'
-import axiosClient from '../../config/axiosClient'
+import React from "react";
+import axiosClient from "../../config/axiosClient";
 
 import ThemeToggler from "./ThemeToggler";
-
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
@@ -18,92 +17,94 @@ const Header = () => {
 
   const pathUrl = usePathname();
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     const getCategories = async () => {
-      const res = await axiosClient.get(`${process.env.NEXT_PUBLIC_API_URL}/categories/all`)
-      setCategories(res.data)
-    }
-    getCategories()
-  }, [])
+      const res = await axiosClient.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/categories/all`,
+      );
+      setCategories(res.data);
+    };
+    getCategories();
+  }, []);
 
- // const menuData: Menu[] = [
- //    {
- //      id: 1,
- //      title: "Trang chủ",
- //      newTab: false,
- //      path: "/",
- //    },
- //    {
- //      id: 2,
- //      title: "Giới thiệu",
- //      newTab: false,
- //      path: "/#features",
- //    },
- //    {
- //      id: 2.1,
- //      title: "Blog",
- //      newTab: false,
- //      path: "/blog",
- //    },
- //    {
- //      id: 2.3,
- //      title: "Docs",
- //      newTab: false,
- //      path: "/docs",
- //    },
- //    {
- //      id: 3,
- //      title: "Pages",
- //      newTab: false,
- //      submenu: [
- //        {
- //          id: 31,
- //          title: "Blog Grid",
- //          newTab: false,
- //          path: "/blog",
- //        },
- //        {
- //          id: 34,
- //          title: "Sign In",
- //          newTab: false,
- //          path: "/auth/signin",
- //        },
- //        {
- //          id: 35,
- //          title: "Sign Up",
- //          newTab: false,
- //          path: "/auth/signup",
- //        },
- //        {
- //          id: 35,
- //          title: "Docs",
- //          newTab: false,
- //          path: "/docs",
- //        },
- //        {
- //          id: 35.1,
- //          title: "Support",
- //          newTab: false,
- //          path: "/support",
- //        },
- //        {
- //          id: 36,
- //          title: "404",
- //          newTab: false,
- //          path: "/error",
- //        },
- //      ],
- //    },
+  // const menuData: Menu[] = [
+  //    {
+  //      id: 1,
+  //      title: "Trang chủ",
+  //      newTab: false,
+  //      path: "/",
+  //    },
+  //    {
+  //      id: 2,
+  //      title: "Giới thiệu",
+  //      newTab: false,
+  //      path: "/#features",
+  //    },
+  //    {
+  //      id: 2.1,
+  //      title: "Blog",
+  //      newTab: false,
+  //      path: "/blog",
+  //    },
+  //    {
+  //      id: 2.3,
+  //      title: "Docs",
+  //      newTab: false,
+  //      path: "/docs",
+  //    },
+  //    {
+  //      id: 3,
+  //      title: "Pages",
+  //      newTab: false,
+  //      submenu: [
+  //        {
+  //          id: 31,
+  //          title: "Blog Grid",
+  //          newTab: false,
+  //          path: "/blog",
+  //        },
+  //        {
+  //          id: 34,
+  //          title: "Sign In",
+  //          newTab: false,
+  //          path: "/auth/signin",
+  //        },
+  //        {
+  //          id: 35,
+  //          title: "Sign Up",
+  //          newTab: false,
+  //          path: "/auth/signup",
+  //        },
+  //        {
+  //          id: 35,
+  //          title: "Docs",
+  //          newTab: false,
+  //          path: "/docs",
+  //        },
+  //        {
+  //          id: 35.1,
+  //          title: "Support",
+  //          newTab: false,
+  //          path: "/support",
+  //        },
+  //        {
+  //          id: 36,
+  //          title: "404",
+  //          newTab: false,
+  //          path: "/error",
+  //        },
+  //      ],
+  //    },
 
- //    {
- //      id: 4,
- //      title: "Support",
- //      newTab: false,
- //      path: "/support",
- //    },
- //  ];
+  //    {
+  //      id: 4,
+  //      title: "Support",
+  //      newTab: false,
+  //      path: "/support",
+  //    },
+  //  ];
 
- const menuData: Menu[] = [
+  const menuData: Menu[] = [
     {
       id: 1,
       title: "Trang chủ",
@@ -121,31 +122,27 @@ const Header = () => {
       title: "Blog",
       newTab: false,
       path: "/blog",
-    }
+    },
   ];
 
-
   const menu: Menu[] = [
-    categories?.filter((value:any)=>{
+    categories?.filter((value: any) => {
       if (value.children)
-      menuData.push({
-        id: value.categoryId,
-        title: value.name,
-        newTab: false,
-        submenu: 
-          value.children?.map((item:any)=>{
+        menuData.push({
+          id: value.categoryId,
+          title: value.name,
+          newTab: false,
+          submenu: value.children?.map((item: any) => {
             return {
               id: item.categoryId,
               title: item.name,
               newTab: false,
-              path: `/categories/${item.categoryId}`
-            }
-          })
-      }) 
-    })
-  ]
-
-  console.log(menuData);  
+              path: `/posts/${item.categoryId}`,
+            };
+          }),
+        });
+    }),
+  ];
 
   // Sticky menu
   const handleStickyMenu = () => {
@@ -237,7 +234,7 @@ const Header = () => {
         >
           <nav>
             <ul className="flex flex-col gap-5 xl:flex-row xl:items-center xl:gap-10">
-              {menuData.map((menuItem:any, key) => (
+              {menuData.map((menuItem: any, key) => (
                 <li key={key} className={menuItem.submenu && "group relative"}>
                   {menuItem.submenu ? (
                     <>
@@ -289,9 +286,7 @@ const Header = () => {
             <Link
               href="#"
               // className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
-            >
-              
-            </Link>
+            ></Link>
           </div>
         </div>
       </div>
