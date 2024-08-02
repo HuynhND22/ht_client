@@ -6,9 +6,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axiosClient from "@/config/axiosClient";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 export default function PostDetails({ id }: any) {
   const [posts, setPosts] = useState<any>([]);
+  const [search, setSearch] = useState<any>();
+  const router = useRouter();
+
   useEffect(() => {
     async function fetchPosts() {
       const res = await axiosClient("/posts/id/" + id);
@@ -22,10 +26,24 @@ export default function PostDetails({ id }: any) {
       <div className="flex flex-col-reverse gap-7.5 lg:flex-row xl:gap-12.5">
         <div className="md:w-1/2 lg:w-[32%]">
           <div className="animate_top mb-10 rounded-md border border-stroke bg-white p-3.5 shadow-solid-13 dark:border-strokedark dark:bg-blacksection">
-            <form action="https://formbold.com/s/unique_form_id" method="POST">
+            <form
+              onSubmit={(value: any) => {
+                value.preventDefault();
+                try {
+                  if (search) {
+                    router.push(`/posts?search=${encodeURIComponent(search)}`);
+                  }
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+            >
               <div className="relative">
                 <input
                   type="text"
+                  value={search}
+                  name="search"
+                  onChange={(e) => setSearch(e.target.value)}
                   placeholder="Tìm kiếm..."
                   className="w-full rounded-lg border border-stroke px-6 py-4 shadow-solid-12 focus:border-primary focus:outline-none dark:border-strokedark dark:bg-black dark:shadow-none dark:focus:border-primary"
                 />
@@ -49,7 +67,7 @@ export default function PostDetails({ id }: any) {
             </form>
           </div>
 
-          {/* <RelatedPost /> */}
+          {posts.categoryId && <RelatedPost categoryId={posts.categoryId} />}
         </div>
 
         <div className="lg:w-2/3">
@@ -58,7 +76,7 @@ export default function PostDetails({ id }: any) {
               <div className="relative aspect-[97/60] w-full sm:aspect-[97/44]">
                 <img
                   src={`${process.env.NEXT_PUBLIC_BUCKET + "/" + posts.cover}`}
-                  alt="Kobe Steel plant that supplied"
+                  alt={posts.name}
                   width={`100%`}
                   className="rounded-md object-cover object-center"
                 />
@@ -68,10 +86,10 @@ export default function PostDetails({ id }: any) {
               {posts?.name}
             </h2>
             <ul className="mb-9 flex flex-wrap gap-5 2xl:gap-7.5">
-              <li>
+              {/* <li>
                 <span className="text-black dark:text-white">Author: </span>{" "}
                 Jhon Doe
-              </li>
+              </li> */}
               <li>
                 <span className="text-black dark:text-white">
                   Ngày đăng: {dayjs(posts?.createdAt).format("DD/MM/YYYY")}

@@ -111,18 +111,18 @@ const Header = () => {
       newTab: false,
       path: "/",
     },
-    {
-      id: 2,
-      title: "Giới thiệu",
-      newTab: false,
-      path: "/#features",
-    },
-    {
-      id: 2.1,
-      title: "Blog",
-      newTab: false,
-      path: "/blog",
-    },
+    // {
+    //   id: 2,
+    //   title: "Giới thiệu",
+    //   newTab: false,
+    //   path: "/#features",
+    // },
+    // {
+    //   id: 2.1,
+    //   title: "Blog",
+    //   newTab: false,
+    //   path: "/blog",
+    // },
   ];
 
   const menu: Menu[] = [
@@ -137,7 +137,7 @@ const Header = () => {
               id: item.categoryId,
               title: item.name,
               newTab: false,
-              path: `/posts/${item.categoryId}`,
+              path: `/posts?category=${item.categoryId}`,
             };
           }),
         });
